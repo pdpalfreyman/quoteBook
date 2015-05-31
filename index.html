@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html ng-app='quoteBook'>
+<link rel="stylesheet" href="style.css" type="text/css" />
+<head>
+	<title></title>
+</head>
+<body ng-controller='mainCtlr'>
+	<div class='options'>
+		<button ng-click='showAdd()'>Show Add</button>
+		<button ng-click='showRemove()'>Show Remove</button>
+		<button ng-click='showFilter()'>Show Filter</button>
+		
+		<div ng-show='toggleAdd'>
+			<button ng-click='addQuote()'>Add Quote</button>
+			<input ng-model='newText'>Text</input>
+			<input ng-model='newAuthor'>Author</input>
+		</div>
+
+		<div ng-show='toggleRemove'>
+			<button ng-click='rmvQuote(test)'>Remove Quote</button>
+			<input ng-model='test'></input>
+		</div>
+
+		<div ng-show='toggleFilter'>
+			<button ng-model='filter'>Filter</button>
+			<input ng-model='filterer[property]'></input>
+			<select ng-model='property' ng-options='option for option in options'></select>
+			<select ng-model='order' ng-options='option for option in options'></select>
+		</div>
+
+
+	</div>
+
+	<div ng-repeat='quote in quotes | filter: filterer | orderBy: order'>
+		<div>"{{quote.text}}"</div>
+		<div>--{{quote.author}}</div>
+	</div>
+
+
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular.js'></script>
+<script src='js/app.js'></script>
+<script src='js/mainCtlr.js'></script>
+<script src='js/dataService.js'></script>
+</body>
+</html>
